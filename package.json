@@ -1,0 +1,28 @@
+{
+  "name": "backend-eventos-culturais",
+  "version": "1.0.0",
+  "description": "backend do projeto de gerencimanto de eventos culturais",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/server.js",
+    "dev": "nodemon ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/queziafiladelfo/backend-eventos-culturais.git"
+  },
+  "author": "PROXY Powess",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/queziafiladelfo/backend-eventos-culturais/issues"
+  },
+  "homepage": "https://github.com/queziafiladelfo/backend-eventos-culturais#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
