@@ -1,11 +1,11 @@
-import express from 'express';
+import express from "express";
+
+import { routes } from "./routes/index.js";
 
 const app = express();
 
-//teste
-app.get("/mensage/:id", (request, response) => {
-    response.send(`Id da menssagem: ${request.params.id}`);
-})
+app.use(express.json());
+app.use(routes);
 
 const PORT = 3100;
-app.listen(PORT, ( ) => console.log(`Server is  running on PORT ${PORT}`));
+app.listen(PORT, () => console.log(`Server is  running on PORT ${PORT}`));
