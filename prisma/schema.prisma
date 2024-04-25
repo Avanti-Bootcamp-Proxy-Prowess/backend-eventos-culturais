@@ -6,3 +6,37 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Categoria {
+  id        String   @id @default(uuid())
+  nome      String   @unique @db.VarChar(255)
+  descricao String?  @db.VarChar
+  evento    Evento[]
+
+  @@map("Categorias")
+}
+
+model Local {
+  id       String   @id @default(uuid())
+  nome     String   @unique @db.VarChar(255)
+  endereco String   @db.VarChar(100)
+  cidade   String   @db.VarChar(100)
+  estado   String   @db.VarChar(100)
+  pais     String   @db.VarChar(100)
+  evento   Evento[]
+
+  @@map("Locais")
+}
+
+model Evento {
+  id           String    @id @default(uuid())
+  nome         String    @db.VarChar(255)
+  data_evento  DateTime  @db.Date
+  descricao    String?   @db.VarChar
+  categoria_id String
+  local_id     String
+  categoria    Categoria @relation(fields: [categoria_id], references: [id])
+  local        Local     @relation(fields: [local_id], references: [id])
+
+  @@map("Eventos")
+}
