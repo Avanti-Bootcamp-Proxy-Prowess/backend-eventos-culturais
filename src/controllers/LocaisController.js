@@ -1,4 +1,4 @@
-import { prismaClient } from "../database/PrismaClient.js";
+const prismaClient = require("../database/PrismaClient.js");
 
 class LocaisController{
 
