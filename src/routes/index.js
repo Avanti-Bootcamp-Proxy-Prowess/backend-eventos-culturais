@@ -1,8 +1,9 @@
-import { Router } from "express";
+// import { Router } from "express";
+const { Router } = require("express");
 
-import categoriasRoutes from "./categorias.routes";
-import eventosRoutes from "./eventos.routes";
-import locaisRoutes from "./locais.routes";
+const categoriasRoutes = require("./categorias.routes");
+const eventosRoutes = require("./eventos.routes");
+const locaisRoutes = require("./locais.routes");
 
 const routes = Router();
 

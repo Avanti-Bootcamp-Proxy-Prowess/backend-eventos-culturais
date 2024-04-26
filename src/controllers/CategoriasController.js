@@ -1,14 +1,14 @@
-import { prismaClient } from "../database/PrismaClient.js";
+const prismaClient = require("../database/PrismaClient.js");
 
 class CategoriasController {
 
-    async listarCategorias (request, response) {
+    async listarCategorias(request, response) {
         const categorias = await prismaClient.categoria.findMany();
-    
+
         response.status(200).json(categorias);
     }
 
-    async criarCategoria (request, response) {
+    async criarCategoria(request, response) {
         const { nome, descricao } = request.body;
         const categoria = await prismaClient.categoria.create({
             data: {
@@ -16,7 +16,7 @@ class CategoriasController {
                 descricao: descricao,
             }
         });
-    
+
         response.status(201).json(categoria);
     }
 
@@ -24,7 +24,7 @@ class CategoriasController {
         const { id } = request.params;
         const { nome, descricao } = request.body;
         const categoria = await prismaClient.categoria.update({
-            where:{
+            where: {
                 id
             },
             data: {
@@ -32,18 +32,18 @@ class CategoriasController {
                 descricao: descricao,
             }
         });
-    
+
         response.status(200).json(categoria);
     }
 
-    async deletarCartegoria (request, response) {
-        const { id } = request.params;   
+    async deletarCategoria(request, response) {
+        const { id } = request.params;
         const categoria = await prismaClient.categoria.delete({
-            where:{
+            where: {
                 id
             }
         });
-    
+
         response.status(204).send();
     }
 
