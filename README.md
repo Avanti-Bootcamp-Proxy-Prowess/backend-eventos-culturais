@@ -1,11 +1,18 @@
 # gerenciamento-eventos-culturais
 Plataforma de gerenciamento de eventos culturais.
 
-comandos para rodar o código
+### Comandos para rodar o código
+- clone o repositório
 ```bash
 git clone https://github.com/queziafiladelfo/backend-eventos-culturais.git
-git fetch -a
-git checkout dev
+```
+- instale as dependências
+```bash
 npm install
+```
+- rode o código
+```bash
 npm run dev
 ```
+### Documentação API
+- em desenvolvimento...
