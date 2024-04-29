@@ -6,6 +6,9 @@ const eventosRoutes = Router();
 
 const eventosController = new EventosController();
 
-//rotas
+eventosRoutes.get("/", eventosController.listarEventos);
+eventosRoutes.post("/", eventosController.criarEvento);
+eventosRoutes.put("/:id", eventosController.atualizarEvento);
+eventosRoutes.delete("/:id", eventosController.deletarEvento);
 
 module.exports = eventosRoutes; 
