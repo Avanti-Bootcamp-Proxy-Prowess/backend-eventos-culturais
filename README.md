@@ -1,9 +1,7 @@
-#  🚧 Em construção 🚧
-
-## Sobre o projeto
+## 📓 Sobre o projeto
 
 Backend de uma plataforma web de gerenciamento de eventos culturais. A plataforma permite aos usuários criar, listar, pesquisar e filtrar
-eventos de forma eficaz, proporcionando uma experiência abrangente para organizadores e participantes.
+eventos de forma eficaz.
 
 ## 🛠️ Tecnologias
 <p align="center">
@@ -28,9 +26,35 @@ git clone https://github.com/queziafiladelfo/backend-eventos-culturais.git
 ```bash
 npm install
 ```
-- rode o código
+- renomei o arquivo ".env-exemplo" para ".env" e configure a variável "DATABASE_URL" de acordo com as configurações do seu computador
+```javascript
+DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
+```
+- Atualize as migrattions do banco de dados
+```bash
+npx prisma migrate dev
+```
+- rode a API
 ```bash
 npm run dev
 ```
+*obs.: o postgres deve estar iniciado*
+
 ## Documentação API
-- em desenvolvimento...
+A documentação foi desenvolvida utilizando a biblioteca do swagger. 
+Para acessar:
+- 1º rode a API
+```bash
+npm run dev
+```
+- 2º No seu navegador acesse a rota "/api-docs"
+
+   ![](https://github.com/queziafiladelfo/backend-eventos-culturais/blob/main/imgsReadme/url_API.PNG)
+
+   *obs.: o número da porta pode mudar de acordo com a porta específicada no arquivo server.js*
+- 3º Deve aparecer da seguinte forma no navegador depois de acessar a rota
+  
+  ![](https://github.com/queziafiladelfo/backend-eventos-culturais/blob/main/imgsReadme/API_doc.PNG)
+  
+
+
