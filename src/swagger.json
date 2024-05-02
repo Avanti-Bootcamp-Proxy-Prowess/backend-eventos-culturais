@@ -1,0 +1,589 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de gerenciamento de eventos culturais",
+        "description": "Esta é uma API com rotas para Categoria, Locais e Eventos",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/categorias": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Listar categorias",
+                "description": "Lista todas as categorias existentes que foram cadastradas",
+                "responses": {
+                    "200": {
+                        "description": "Requisição bem-sucedida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "nome": {
+                                                "type": "string"
+                                            },
+                                            "descricao": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parâmetros inválidos"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Criar categoria",
+                "description": "Cria uma nova categoria",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "nome",
+                                    "descricao"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Categoria criada com sucesso"
+                    }
+                }
+            }
+        },
+        "/categorias/{id}": {
+            "put": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Atualiza categoria por id",
+                "description": "Atualiza uma categoria",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "nome",
+                                    "descricao"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Categoria atualizado com sucesso"
+                    },
+                    "404": {
+                        "description": "Categoria  não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Deleta categoria por id",
+                "description": "Deleta uma categoria por id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Categoria excluída com sucesso"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    }
+                }
+            }
+        },
+        "/locais": {
+            "get": {
+                "tags": [
+                    "Locais"
+                ],
+                "summary": "Listar locais",
+                "description": "Lista todas os locais existentes que foram cadastrados",
+                "responses": {
+                    "200": {
+                        "description": "Requisição bem-sucedida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "nome": {
+                                                "type": "string"
+                                            },
+                                            "descricao": {
+                                                "type": "string"
+                                            },
+                                            "cidade": {
+                                                "type": "string"
+                                            },
+                                            "estado": {
+                                                "type": "string"
+                                            },
+                                            "pais": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parâmetros inválidos"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Locais"
+                ],
+                "summary": "Criar local",
+                "description": "Cria um novo local",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "endereco": {
+                                        "type": "string"
+                                    },
+                                    "cidade": {
+                                        "type": "string"
+                                    },
+                                    "estado": {
+                                        "type": "string"
+                                    },
+                                    "pais": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "nome",
+                                    "endereco",
+                                    "cidade",
+                                    "estado",
+                                    "pais"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Local criado com sucesso"
+                    }
+                }
+            }
+        },
+        "/locais/{id}": {
+            "put": {
+                "tags": [
+                    "Locais"
+                ],
+                "summary": "Atualiza local por id",
+                "description": "Atualiza um local",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "endereco": {
+                                        "type": "string"
+                                    },
+                                    "cidade": {
+                                        "type": "string"
+                                    },
+                                    "estado": {
+                                        "type": "string"
+                                    },
+                                    "pais": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": []
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Local atualizado com sucesso"
+                    },
+                    "404": {
+                        "description": "Local não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Locais"
+                ],
+                "summary": "Deletar local por id",
+                "description": "Deleta um local",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Local excluído com sucesso"
+                    },
+                    "404": {
+                        "description": "Local não encontrado"
+                    }
+                }
+            }
+        },
+        "/eventos": {
+            "get": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Listar eventos",
+                "description": "Lista todas os eventos existentes que foram cadastrados",
+                "responses": {
+                    "200": {
+                        "description": "Requisição bem-sucedida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "nome": {
+                                                "type": "string"
+                                            },
+                                            "data_evento": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "descricao": {
+                                                "type": "string"
+                                            },
+                                            "categoria_id": {
+                                                "type": "string"
+                                            },
+                                            "local_id": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parâmetros inválidos"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Criar evento",
+                "description": "Cria um novo evento",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "data_evento": {
+                                        "type": "date-time"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    },
+                                    "categoria_id": {
+                                        "type": "string"
+                                    },
+                                    "local_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "nome",
+                                    "data_evento",
+                                    "descricao",
+                                    "categoria_id",
+                                    "local_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Evento criado com sucesso"
+                    }
+                }
+            }
+        },
+        "/eventos/{id}": {
+            "put": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Atualiza evento por id",
+                "description": "Atualiza um evento",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "data_evento": {
+                                        "type": "date-time"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    },
+                                    "categoria_id": {
+                                        "type": "string"
+                                    },
+                                    "local_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": []
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Evento atualizado com sucesso"
+                    },
+                    "404": {
+                        "description": "Evento não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Deletar evento por id",
+                "description": "Deletar um evento",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Evento excluído com sucesso"
+                    },
+                    "404": {
+                        "description": "Evento não encontrado"
+                    }
+                }
+            }
+        },
+        "/eventos/filtrar": {
+            "get": {
+                "tags": [
+                    "Eventos"
+                ],
+                "summary": "Filtrar eventos",
+                "description": "Lista eventos com base nos parâmetros de filtro",
+                "parameters": [
+                    {
+                        "name": "nome",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                        
+                    },
+                    {
+                        "name": "categoria",
+                        "in": "query",
+                        "description": "ID da categoria do evento",
+                        "schema": {
+                            "type": "string"
+                        }
+                        
+                    },
+                    {
+                        "name": "local",
+                        "in": "query",
+                        "description": "ID do local do evento",
+                        "schema": {
+                            "type": "string"
+                        }
+                        
+                    },
+                    {
+                        "name": "data",
+                        "in": "query",
+                        "description": "Data do evento (formato YYYY-MM-DD)",
+                        "schema": {
+                          "type": "string",
+                          "format": "date"
+                        }
+                      }
+                    
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Requisição bem-sucedida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "nome": {
+                                                "type": "string"
+                                            },
+                                            "data_evento": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "descricao": {
+                                                "type": "string"
+                                            },
+                                            "categoria_id": {
+                                                "type": "string"
+                                            },
+                                            "local_id": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parâmetros inválidos"
+                    }
+                }
+            }
+        }
+    }
+}
