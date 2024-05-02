@@ -1,6 +1,6 @@
 const prismaClient = require("../database/PrismaClient.js");
 
-class EventosController{
+class EventosController {
     async listarEventos(request, response) {
         const eventos = await prismaClient.evento.findMany();
 
@@ -8,7 +8,7 @@ class EventosController{
     }
 
     async criarEvento(request, response) {
-        const { nome, data_evento, descricao, categoria_id, local_id  } = request.body;
+        const { nome, data_evento, descricao, categoria_id, local_id } = request.body;
         const evento = await prismaClient.evento.create({
             data: {
                 nome: nome,
@@ -51,6 +51,24 @@ class EventosController{
 
         response.status(204).send();
     }
+
+    // filtros
+    async filtrarEventos(request, response) {
+        const { nome, categoria, local, data } = request.query;
+        const eventosFiltrados = await prismaClient.evento.findMany({
+            where: {
+                OR: [ 
+                    nome ? {nome: nome} : {},
+                    categoria ? { categoria_id: categoria } : {},
+                    local ? { local_id: local } : {},
+                    data ? { data_evento: new Date(data) } : {}
+                ]
+            }
+        });
+        response.status(200).json(eventosFiltrados);
+    }
+
+
 }
 
 module.exports = EventosController;
