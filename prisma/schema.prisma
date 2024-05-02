@@ -10,10 +10,10 @@ datasource db {
 model Categoria {
   id        String   @id @default(uuid())
   nome      String   @unique @db.VarChar(255)
-  descricao String?  @db.VarChar
+  descricao String  @db.VarChar
   evento    Evento[]
 
-  @@map("Categorias")
+  @@map("categorias")
 }
 
 model Local {
@@ -25,18 +25,18 @@ model Local {
   pais     String   @db.VarChar(100)
   evento   Evento[]
 
-  @@map("Locais")
+  @@map("locais")
 }
 
 model Evento {
   id           String    @id @default(uuid())
   nome         String    @db.VarChar(255)
-  data_evento  DateTime  @db.Date
-  descricao    String?   @db.VarChar
+  data_evento  DateTime  @db.Timestamp 
+  descricao    String   @db.VarChar
   categoria_id String
   local_id     String
   categoria    Categoria @relation(fields: [categoria_id], references: [id])
   local        Local     @relation(fields: [local_id], references: [id])
 
-  @@map("Eventos")
+  @@map("eventos")
 }

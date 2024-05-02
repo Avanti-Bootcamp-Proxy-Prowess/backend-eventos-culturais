@@ -1,11 +1,14 @@
 const { Router } = require("express");
 
-const EventosController = require("../controllers/LocaisController");
+const LocaisController = require("../controllers/LocaisController");
 
-const locaisRoutes = Router();
+const locaisRouter = Router();
 
-const locaisController = new EventosController();
+const locaisController = new LocaisController();
 
-//rotas
+locaisRouter.get('/', locaisController.listarLocais);
+locaisRouter.post('/', locaisController.criarLocal);
+locaisRouter.put('/:id', locaisController.atualizarLocal);
+locaisRouter.delete('/:id', locaisController.deletarLocal);
 
-module.exports = locaisRoutes; 
+module.exports = locaisRouter; 
