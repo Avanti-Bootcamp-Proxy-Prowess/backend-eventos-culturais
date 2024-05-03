@@ -61,3 +61,32 @@ npm run dev
 - 3º Deve aparecer da seguinte forma no navegador depois de acessar a rota
   
   ![](https://github.com/queziafiladelfo/backend-eventos-culturais/blob/main/imgsReadme/API_doc.PNG)
+
+
+
+## 👨🏻‍💻 Colaboradores 👩🏻‍💻
+
+<div>
+
+<a href="" target="_blank">
+
+
+<a href="https://github.com/Yan2024" target="_blank">
+
+<img src="https://avatars.githubusercontent.com/u/141780635?v=4" heigth="50px" width="50px" style="border-radius: 50%;" />
+</a>
+
+<a href="https://github.com/queziafiladelfo" target="_blank">
+
+<img src="https://avatars.githubusercontent.com/u/9157219?v=4" heigth="50px" width="50px" style="border-radius: 50%;" />
+</a>
+
+<a href="https://github.com/tosename" target="_blank">
+
+<img src="https://avatars.githubusercontent.com/u/87732442?v=4" heigth="50px" width="50px" style="border-radius: 50%;" />
+</a>
+
+<a href="https://github.com/Bibia22" target="_blank">
+
+<img src="https://avatars.githubusercontent.com/u/152140782?v=4" heigth="50px" width="50px" style="border-radius: 50%;" />
+</a>
