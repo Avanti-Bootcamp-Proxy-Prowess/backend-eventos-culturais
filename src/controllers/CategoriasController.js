@@ -10,41 +10,59 @@ class CategoriasController {
 
     async criarCategoria(request, response) {
         const { nome, descricao } = request.body;
-        const categoria = await prismaClient.categoria.create({
-            data: {
-                nome: nome,
-                descricao: descricao,
-            }
-        });
 
-        response.status(201).json(categoria);
+        if(!nome || !descricao) {
+            response.status(400).send('Um ou mais campos não foram preenchidos');
+        }
+
+        try{
+            const categoria = await prismaClient.categoria.create({
+                data: {
+                    nome: nome,
+                    descricao: descricao,
+                }
+            });
+            response.status(201).json(categoria);
+        } catch(error) {
+            response.status(500).send();
+        }
     }
 
     async atualizarCategoria(request, response) {
         const { id } = request.params;
         const { nome, descricao } = request.body;
-        const categoria = await prismaClient.categoria.update({
-            where: {
-                id
-            },
-            data: {
-                nome: nome,
-                descricao: descricao,
-            }
-        });
-
-        response.status(200).json(categoria);
+        try {
+            const categoria = await prismaClient.categoria.update({
+                where: {
+                    id
+                },
+                data: {
+                    nome: nome,
+                    descricao: descricao,
+                }
+            });
+            response.status(200).json(categoria);
+        } catch(error) {
+            response.status(500).send();
+        }
     }
 
     async deletarCategoria(request, response) {
         const { id } = request.params;
-        const categoria = await prismaClient.categoria.delete({
-            where: {
-                id
+        try {
+            const categoria = await prismaClient.categoria.delete({
+                where: {
+                    id
+                }
+            });
+            response.status(204).send();
+        } catch(error) {
+            if(error.code === 'P2025') {
+                response.status(404).send('Registro não encontrado');
+            }else {
+                response.status(500).send();
             }
-        });
-
-        response.status(204).send();
+        }
     }
 
 }
