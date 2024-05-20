@@ -10,7 +10,7 @@ datasource db {
 model Categoria {
   id        String   @id @default(uuid())
   nome      String   @unique @db.VarChar(255)
-  descricao String  @db.VarChar
+  descricao String   @db.VarChar(255)
   evento    Evento[]
 
   @@map("categorias")
@@ -29,14 +29,30 @@ model Local {
 }
 
 model Evento {
-  id           String    @id @default(uuid())
-  nome         String    @db.VarChar(255)
-  data_evento  DateTime  @db.Timestamp 
-  descricao    String   @db.VarChar
+  id           String   @id @default(uuid())
+  nome         String   @db.VarChar(255)
+  data_evento  DateTime @db.Timestamp
+  descricao    String   @db.VarChar(255)
   categoria_id String
   local_id     String
-  categoria    Categoria @relation(fields: [categoria_id], references: [id])
-  local        Local     @relation(fields: [local_id], references: [id])
+  usuario_id   String
+
+  categoria Categoria @relation(fields: [categoria_id], references: [id])
+  local     Local     @relation(fields: [local_id], references: [id])
+  user      Usuario   @relation(fields: [usuario_id], references: [id])
 
   @@map("eventos")
+}
+
+model Usuario {
+  id        String   @id @default(uuid())
+  nome      String
+  email     String   @unique
+  password  String
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  evento    Evento[]
+
+  @@map("usuarios")
 }

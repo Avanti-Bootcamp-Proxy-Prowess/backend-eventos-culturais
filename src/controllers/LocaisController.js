@@ -1,13 +1,13 @@
-const prismaClient  = require("../database/PrismaClient.js");
+const prismaClient = require("../database/PrismaClient.js");
 
 class LocaisController {
-    async listarLocais (request, response) {
+    async listarLocais(request, response) {
         const locais = await prismaClient.local.findMany();
 
         response.status(200).json(locais);
     }
 
-    async criarLocal (request, response) {
+    async criarLocal(request, response) {
         const { nome, endereco, cidade, estado, pais } = request.body;
 
         if (!nome || !endereco || !cidade || !estado || !pais) {
@@ -25,12 +25,12 @@ class LocaisController {
                 }
             });
             response.status(201).json(local);
-        } catch(error) {
+        } catch (error) {
             response.status(500).send();
         }
     }
 
-    async atualizarLocal (request, response) {
+    async atualizarLocal(request, response) {
         const { id } = request.params;
         const { nome, endereco, cidade, estado, pais } = request.body;
         try {
@@ -47,12 +47,12 @@ class LocaisController {
                 }
             });
             response.status(200).json(local);
-        } catch(error) {
+        } catch (error) {
             response.status(500).send();
-        }  
+        }
     }
 
-    async deletarLocal (request, response) {
+    async deletarLocal(request, response) {
         const { id } = request.params
         try {
             const local = await prismaClient.local.delete({
@@ -61,10 +61,10 @@ class LocaisController {
                 }
             });
             response.status(204).send();
-        } catch(error) {
-            if(error.code === 'P2025') {
+        } catch (error) {
+            if (error.code === 'P2025') {
                 response.status(404).send('Registro não encontrado');
-            }else {
+            } else {
                 response.status(500).send();
             }
         }
