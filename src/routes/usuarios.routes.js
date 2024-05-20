@@ -8,6 +8,5 @@ const usuariosController = new UsuariosController();
 
 usuariosRoutes .post("/", usuariosController.criarUsuario);
 usuariosRoutes .put('/', Autenticacao, usuariosController.update)
-// usuariosRoutes .put('/', usuariosController.update)
 
 module.exports = usuariosRoutes;
