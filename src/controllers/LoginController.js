@@ -31,10 +31,11 @@ class LoginController {
 
             return response.status(201).json({ token, user });
         } catch (error) {
-            console.error(error); 
+            console.error(error);
             return response.status(500).json({ message: "Erro interno do servidor." });
         }
     }
+
 }
 
 module.exports = LoginController;

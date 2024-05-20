@@ -5,7 +5,7 @@ const LocaisController = require("../controllers/LocaisController");
 const locaisRouter = Router();
 
 const locaisController = new LocaisController();
-// locaisRouter.use(Autenticacao);
+locaisRouter.use(Autenticacao);
 
 locaisRouter.get('/', locaisController.listarLocais);
 locaisRouter.post('/', locaisController.criarLocal);
