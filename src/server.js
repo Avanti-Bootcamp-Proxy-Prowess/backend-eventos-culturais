@@ -6,10 +6,13 @@ const routes = require("./routes");
 
 const swaggerFile = require("./swagger.json");
 
+const uploadConfig = require("./configs/upload");
+
 const app = express();
 
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER));
 app.use(routes);
 
 const PORT = 3100;

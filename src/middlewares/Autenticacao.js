@@ -16,6 +16,9 @@ function Autenticacao(request, response, next) {
     request.user = {
       id: user_id,
     };
+    // request.usuario = {
+    //   id: user_id,
+    // };
 
     return next();
   } catch (error) {
