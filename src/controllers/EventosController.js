@@ -8,9 +8,9 @@ class EventosController {
     }
 
     async criarEvento(request, response) {
-        const { nome, data_evento, descricao, categoria_id, local_id } = request.body;
+        const { nome, data_evento, descricao, categoria_id, local_id, usuario_id } = request.body;
 
-        if(!nome || !data_evento || !descricao || !categoria_id || !local_id) {
+        if(!nome || !data_evento || !descricao || !categoria_id || !local_id || !usuario_id) {
             response.status(400).send('Um ou mais campos não foram preenchidos');
         }
 
@@ -21,7 +21,8 @@ class EventosController {
                     data_evento: data_evento,
                     descricao: descricao,
                     categoria_id: categoria_id,
-                    local_id: local_id
+                    local_id: local_id,
+                    usuario_id: usuario_id
                 }
             });
             response.status(201).json(evento);   
