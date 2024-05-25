@@ -21,10 +21,10 @@ class CategoriasController {
                 categorias = await prismaClient.categoria.findMany();
             }
 
-            response.status(200).json(categorias);
+            return response.status(200).json(categorias);
         } catch (error) {
             console.error("Erro ao buscar categorias:", error);
-            response.status(500).send("Erro ao buscar categorias");
+            return response.status(500).send("Erro ao buscar categorias");
         }
     }
 
@@ -32,7 +32,7 @@ class CategoriasController {
         const { nome, descricao } = request.body;
 
         if (!nome || !descricao) {
-            response.status(400).send('Um ou mais campos não foram preenchidos');
+            return response.status(400).send('Um ou mais campos não foram preenchidos');
         }
 
         try {
@@ -42,9 +42,9 @@ class CategoriasController {
                     descricao: descricao,
                 }
             });
-            response.status(201).json(categoria);
+            return response.status(201).json(categoria);
         } catch (error) {
-            response.status(500).send();
+            return response.status(500).send();
         }
     }
 
@@ -61,9 +61,9 @@ class CategoriasController {
                     descricao: descricao,
                 }
             });
-            response.status(200).json(categoria);
+            return response.status(200).json(categoria);
         } catch (error) {
-            response.status(500).send();
+            return response.status(500).send();
         }
     }
 
@@ -75,12 +75,12 @@ class CategoriasController {
                     id
                 }
             });
-            response.status(204).send();
+            return response.status(204).send();
         } catch (error) {
             if (error.code === 'P2025') {
-                response.status(404).send('Registro não encontrado');
+                return response.status(404).send('Registro não encontrado');
             } else {
-                response.status(500).send();
+                return response.status(500).send();
             }
         }
     }
