@@ -2,16 +2,34 @@ const prismaClient = require("../database/PrismaClient.js");
 
 class LocaisController {
     async listarLocais(request, response) {
-        const locais = await prismaClient.local.findMany();
+        const { nome } = request.query
 
-        response.status(200).json(locais);
+        try {
+            let locais;
+            if(nome) {
+                locais = await prismaClient.local.findMany({
+                    where: {
+                        nome: {
+                            contains: nome,
+                            mode: 'insensitive'
+                        }
+                    }
+                });
+            } else {
+                locais = await prismaClient.local.findMany();
+            }
+            return response.status(200).json(locais)
+        } catch(error) {
+            console.error("Erro ao buscar locais:", error);
+            return response.status(500).send("Erro ao buscar locais");
+        }
     }
 
     async criarLocal(request, response) {
         const { nome, endereco, cidade, estado, pais } = request.body;
 
         if (!nome || !endereco || !cidade || !estado || !pais) {
-            response.status(400).send('Um ou mais campos não foram preenchidos');
+            return response.status(400).send('Um ou mais campos não foram preenchidos');
         }
 
         try {
@@ -24,9 +42,9 @@ class LocaisController {
                     pais: pais,
                 }
             });
-            response.status(201).json(local);
+            return response.status(201).json(local);
         } catch (error) {
-            response.status(500).send();
+            return response.status(500).send();
         }
     }
 
@@ -46,9 +64,9 @@ class LocaisController {
                     pais: pais,
                 }
             });
-            response.status(200).json(local);
+            return response.status(200).json(local);
         } catch (error) {
-            response.status(500).send();
+            return response.status(500).send();
         }
     }
 
@@ -60,12 +78,12 @@ class LocaisController {
                     id: id
                 }
             });
-            response.status(204).send();
+            return response.status(204).send();
         } catch (error) {
             if (error.code === 'P2025') {
-                response.status(404).send('Registro não encontrado');
+                return response.status(404).send('Registro não encontrado');
             } else {
-                response.status(500).send();
+                return response.status(500).send();
             }
         }
     }

@@ -16,9 +16,9 @@ class EventosController {
                     local: true,
                 },
             });
-            response.json(eventos);
+            return response.json(eventos);
         } catch (error) {
-            response.status(500).send();
+            return response.status(500).send();
         }
     }
 
@@ -26,7 +26,7 @@ class EventosController {
         const { nome, data_evento, descricao, categoria_id, local_id, usuario_id } = request.body;
 
         if (!nome || !data_evento || !descricao || !categoria_id || !local_id || !usuario_id) {
-            response.status(400).send('Um ou mais campos não foram preenchidos');
+            return response.status(400).send('Um ou mais campos não foram preenchidos');
         }
 
         const dataEventoISO = new Date(data_evento).toISOString();
@@ -42,9 +42,9 @@ class EventosController {
                     usuario_id: usuario_id
                 }
             });
-            response.status(201).json(evento);
+            return response.status(201).json(evento);
         } catch (error) {
-            response.status(500).send();
+            return response.status(500).send();
         }
     }
 
@@ -68,9 +68,9 @@ class EventosController {
                     local: true 
                 }
             });
-            response.status(200).json(evento);
+            return response.status(200).json(evento);
         } catch (error) {
-            response.status(500).send();
+            return response.status(500).send();
         }
     }
 
@@ -82,12 +82,12 @@ class EventosController {
                     id
                 }
             });
-            response.status(204).send();
+            return response.status(204).send();
         } catch (error) {
             if (error.code === 'P2025') {
-                response.status(404).send('Registro não encontrado');
+                return response.status(404).send('Registro não encontrado');
             } else {
-                response.status(500).send();
+                return response.status(500).send();
             }
         }
     }
@@ -130,10 +130,10 @@ class EventosController {
                 },
             });
 
-            response.status(200).json(eventosFiltrados);
+            return response.status(200).json(eventosFiltrados);
         } catch (error) {
             console.error("Erro ao buscar eventos:", error); // Log do erro
-            response.status(500).send();
+            return response.status(500).send();
         }
     }
  
