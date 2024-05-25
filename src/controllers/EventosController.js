@@ -8,7 +8,7 @@ class EventosController {
                 where: {
                     nome: {
                         contains: nome,
-                        mode: 'insensitive', // Para tornar a pesquisa case-insensitive
+                        mode: 'insensitive', 
                     }
                 },
                 include: {
@@ -64,8 +64,8 @@ class EventosController {
                     local_id: local_id
                 },
                 include: {
-                    categoria: true, // Inclua os dados da categoria associada ao evento
-                    local: true // Inclua os dados do local associado ao evento
+                    categoria: true, 
+                    local: true 
                 }
             });
             response.status(200).json(evento);
@@ -92,42 +92,6 @@ class EventosController {
         }
     }
 
-    // filtros
-    // async filtrarEventos(request, response) {
-    //     const { nome, categoria, local, data } = request.query;
-    //     console.log("Filtros recebidos:", { nome, categoria, local, data }); // Log dos filtros recebidos
-    //     try {
-    //         const filtros = {};
-
-    //         if (nome) {
-    //             filtros.nome = { contains: nome, mode: 'insensitive' };
-    //         }
-    //         if (categoria) {
-    //             filtros.categoria_id = parseInt(categoria);
-    //         }
-    //         if (local) {
-    //             filtros.local_id = parseInt(local);
-    //         }
-    //         if (data) {
-    //             filtros.data_evento = new Date(data);
-    //         }
-
-    //         console.log("Filtros aplicados:", filtros); // Log dos filtros aplicados
-
-    //         const eventosFiltrados = await prismaClient.evento.findMany({
-    //             where: filtros,
-    //             include: {
-    //                 categoria: true,
-    //                 local: true,
-    //             },
-    //         });
-
-    //         response.status(200).json(eventosFiltrados);
-    //     } catch (error) {
-    //         console.error("Erro ao buscar eventos:", error); // Log do erro
-    //         response.status(500).send();
-    //     }
-    // }
 
     async filtrarEventos(request, response) {
         const { nome, categoria, local, data } = request.query;
@@ -140,16 +104,16 @@ class EventosController {
                 filtros.nome = { contains: nome, mode: 'insensitive' };
             }
             if (categoria) {
-                filtros.categoria_id = parseInt(categoria);
+                filtros.categoria_id = categoria.toString(); 
             }
             if (local) {
-                filtros.local_id = parseInt(local);
+                filtros.local_id = local.toString(); 
             }
             if (data) {
                 filtros.data_evento = new Date(data);
             }
 
-            console.log("Filtros aplicados:", filtros); // Log dos filtros aplicados
+            console.log("Filtros aplicados:", filtros); // log dos filtros 
 
             const eventosFiltrados = await prismaClient.evento.findMany({
                 where: {
