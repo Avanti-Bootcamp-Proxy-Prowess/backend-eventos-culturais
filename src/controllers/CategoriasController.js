@@ -1,21 +1,41 @@
 const prismaClient = require("../database/PrismaClient.js");
 
 class CategoriasController {
-
+    
     async listarCategorias(request, response) {
-        const categorias = await prismaClient.categoria.findMany();
+        const { nome } = request.query;
 
-        response.status(200).json(categorias);
+        try {
+            let categorias;
+
+            if (nome) {
+                categorias = await prismaClient.categoria.findMany({
+                    where: {
+                        nome: {
+                            contains: nome,
+                            mode: "insensitive"
+                        }
+                    }
+                });
+            } else {
+                categorias = await prismaClient.categoria.findMany();
+            }
+
+            response.status(200).json(categorias);
+        } catch (error) {
+            console.error("Erro ao buscar categorias:", error);
+            response.status(500).send("Erro ao buscar categorias");
+        }
     }
 
     async criarCategoria(request, response) {
         const { nome, descricao } = request.body;
 
-        if(!nome || !descricao) {
+        if (!nome || !descricao) {
             response.status(400).send('Um ou mais campos não foram preenchidos');
         }
 
-        try{
+        try {
             const categoria = await prismaClient.categoria.create({
                 data: {
                     nome: nome,
@@ -23,7 +43,7 @@ class CategoriasController {
                 }
             });
             response.status(201).json(categoria);
-        } catch(error) {
+        } catch (error) {
             response.status(500).send();
         }
     }
@@ -42,7 +62,7 @@ class CategoriasController {
                 }
             });
             response.status(200).json(categoria);
-        } catch(error) {
+        } catch (error) {
             response.status(500).send();
         }
     }
@@ -56,10 +76,10 @@ class CategoriasController {
                 }
             });
             response.status(204).send();
-        } catch(error) {
-            if(error.code === 'P2025') {
+        } catch (error) {
+            if (error.code === 'P2025') {
                 response.status(404).send('Registro não encontrado');
-            }else {
+            } else {
                 response.status(500).send();
             }
         }
